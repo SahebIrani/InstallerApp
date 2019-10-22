@@ -1,0 +1,17 @@
+{
+  "DataProvider": "InMemory", // InMemory , SqlServer , PostgreSQL , SQLite
+  "ConnectionStrings": {
+    "SqlServerConnection": "Server=(localdb)\\mssqllocaldb;Database=InstallerAppDB;Trusted_Connection=True;MultipleActiveResultSets=true",
+    "InMemoryConnection": "InstallerApp",
+    "PostgreSQLConnection": "",
+    "SQLiteConnection": "DataSource=./App_Data/InstallerApp.db"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}

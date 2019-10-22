@@ -1,0 +1,15 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<article class="row border p-5">
+    <article class="d-flex flex-wrap">
+        @await foreach (var product  in Model.Products)
+        {
+
+        }
+        <section></section>
+    </article>
+</article>

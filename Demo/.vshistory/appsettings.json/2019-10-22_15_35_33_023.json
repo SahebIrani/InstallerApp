@@ -1,0 +1,22 @@
+{
+  "IsFirstStart": false,
+  "InitializeFakeData": true,
+  "AdminUserName": "SinjulMSBH",
+  "AdminEmail": "sinjul@yahoo.com",
+  "AdminPassword": "Sinjul_4",
+  "DataProvider": "SqlServer",
+  "ConnectionStrings": {
+    "SqlServerConnection": "Server=(localdb)\\mssqllocaldb;Database=InstallerAppDB;Trusted_Connection=True;MultipleActiveResultSets=true",
+    "InMemoryConnection": "InstallerApp",
+    "PostgreSQLConnection": "Host=my_host;Database=my_db;Username=my_user;Password=my_pw",
+    "SQLiteConnection": "DataSource=./App_Data/InstallerApp.db"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}

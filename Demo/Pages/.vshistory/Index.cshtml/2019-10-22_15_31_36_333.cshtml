@@ -1,0 +1,18 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<article class="row border p-5">
+    <article class="d-flex flex-wrap">
+        @await foreach (Demo.Models.Product product in Model.Products)
+        {
+            <section class="p-2">
+                <img src="@product.FileName" alt="@product.Title" class="img-fluid img-thumbnail" />
+                <h4 class="display-2 text-info">@product.Title</h4>
+                <p class="text-success display-4">@product.Price.ToString("#,00")</p>
+            </section>
+        }
+    </article>
+</article>

@@ -1,0 +1,93 @@
+@page
+@model Demo.Areas.FirstStart.Pages.IndexModel
+@{
+    ViewData["Title"] = "FirstStart Page";
+}
+
+@if (Model.CompletedDefault)
+{
+    <div>
+        <div class="text-center">
+            <h1>InstallerApp</h1>
+            <span class="text-success">Installation completed.  Now restarting and redirecting to the home page</span>
+        </div>
+    </div>
+
+    <script>(function () {window.setTimeout(function(){window.location.href = "@Url.Page("/Index", new { area = "" })";}, 100);})();</script>
+}
+
+@if (!Model.Completed)
+{
+    <div>
+        <div class="text-center">
+            <h1>InstallerApp</h1>
+            <h6 class="font-italic">The .NET Core InstallerApp Platform.</h6>
+        </div>
+        <p>Thanks for installing InstallerApp, Let's complete the install: </p>
+
+        <div class="card">
+            <div class="card-body bg-dark text-light">
+                <form method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstStartConfig.AdminUserName">Administrator Username</label>
+                        <input class="form-control" asp-for="FirstStartConfig.AdminUserName" aria-describedby="help" placeholder="Enter admin username">
+                        <small id="usernameHelp" class="form-text text-muted">Let's make it unique. </small>
+                        <span asp-validation-for="FirstStartConfig.AdminUserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstStartConfig.AdminEmail">Administrator Email Address</label>
+                        <input class="form-control"
+                               asp-for="FirstStartConfig.AdminEmail" aria-describedby="help" placeholder="Enter admin email address">
+                        <span asp-validation-for="FirstStartConfig.AdminEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstStartConfig.AdminPassword">Password</label>
+                        <input class="form-control" asp-for="FirstStartConfig.AdminPassword" placeholder="Password">
+                        <small id="passwordHelp" class="form-text text-muted">Long and random.</small>
+                        <span asp-validation-for="FirstStartConfig.AdminPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstStartConfig.Database">Database</label>
+                        <select asp-for="FirstStartConfig.Database" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>InMemory</option>
+                            <option>SqlServer</option>
+                            <option>PostgreSQL</option>
+                            <option>SQLite</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstStartConfig.ConnectionString">ConnectionString</label>
+                        <input class="form-control" asp-for="FirstStartConfig.ConnectionString" placeholder="ConnectionString">
+                        <small id="databaseHelp" class="form-text text-muted">Enter your connection string here - leave blank for default</small>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstStartConfig.InitializeFakeData">InitializeFakeData</label>
+                        <input class="form-control" asp-for="FirstStartConfig.InitializeFakeData" placeholder="InitializeFakeData">
+                        <small id="databaseInitializeFakeData" class="form-text text-muted">Do you want to fake data you made ?</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary px-2">Submit</button>
+                </form>
+                <hr />
+                <form method="post" asp-page-handler="DefaultInitializer">
+                    <button type="submit" class="btn btn-success px-2">Default</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div>
+        <div class="text-center">
+            <h1>InstallerApp</h1>
+            <span class="text-success">Installation completed.  Now restarting and redirecting to the home page</span>
+        </div>
+    </div>
+
+    <script>(function () {window.setTimeout(function(){window.location.href = "@Url.Page("/Index", new { area = "" })";}, 4000);})();</script>
+
+    await Task.Run(() => System.Threading.Thread.Sleep(1000))
+              .ContinueWith(async t => await Demo.Areas.FirstStart.Extensions.StartupExtensions._RestartHost());
+}

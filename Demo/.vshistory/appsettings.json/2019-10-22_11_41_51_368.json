@@ -1,0 +1,16 @@
+{
+  "DataProvider": "SQLite",
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=InstallerAppDB;Trusted_Connection=True;MultipleActiveResultSets=true",
+    "InstallerAppIdentityConnection": "DataSource=./App_Data/InstallerAppIdentity.db",
+    "InstallerAppDataConnection": "DataSource=./App_Data/InstallerApp.db"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}

@@ -1,0 +1,22 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@{
+    bool IsAny = false;
+}
+<article class="row border rounded py-4">
+    <article class="d-flex flex-wrap align-items-center justify-content-center align-content-center">
+        @await foreach (Demo.Models.Product product in Model.Products)
+        {
+            <section class="m-1 p-1 border rounded col-3 text-center">
+                <img src="@product.FileName" alt="@product.Title" class="img-fluid img-thumbnail" />
+                <p class="display-4 text-info">@product.Title</p>
+                <p class="text-success display-4">@product.Price.ToString("#,00")</p>
+            </section>
+        }
+    </article>
+
+</article>
