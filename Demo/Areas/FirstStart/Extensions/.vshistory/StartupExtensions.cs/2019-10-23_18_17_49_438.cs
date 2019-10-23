@@ -20,9 +20,11 @@ namespace Demo.Areas.FirstStart.Extensions
 
         public static IServiceCollection AddConfigureDatabaseWithIdentity(this IServiceCollection services, IConfiguration config)
         {
+            string DataProvider = ConstStrings.DataProvider;
+
             Action<DbContextOptionsBuilder> optionsBuilder;
 
-            switch (config[ConstStrings.DataProvider].ToLowerInvariant())
+            switch (config[DataProvider].ToLowerInvariant())
             {
                 case "sqlserver":
                     services.AddEntityFrameworkSqlServer();

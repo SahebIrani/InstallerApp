@@ -14,34 +14,42 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Demo.Areas.FirstStart.Extensions
 {
+
     public static class StartupExtensions
     {
         public static Func<Task> _RestartHost;
 
         public static IServiceCollection AddConfigureDatabaseWithIdentity(this IServiceCollection services, IConfiguration config)
         {
+            string DataProvider = ConstStrings.DataProvider;
+
             Action<DbContextOptionsBuilder> optionsBuilder;
 
-            switch (config[ConstStrings.DataProvider].ToLowerInvariant())
+            string SqlServerConnection = config.GetConnectionString(ConstStrings.SqlServerConnection);
+            string InMemoryConnection = config.GetConnectionString(ConstStrings.InMemoryConnection);
+            string PostgreSQLConnection = config.GetConnectionString(ConstStrings.PostgreSQLConnection);
+            string SQLiteConnection = config.GetConnectionString(ConstStrings.SQLiteConnection);
+
+            switch (config[DataProvider].ToLowerInvariant())
             {
                 case "sqlserver":
                     services.AddEntityFrameworkSqlServer();
-                    optionsBuilder = options => options.UseSqlServer(config.GetConnectionString(ConstStrings.SqlServerConnection));
+                    optionsBuilder = options => options.UseSqlServer(SqlServerConnection);
                     break;
 
                 case "sqlite":
                     services.AddEntityFrameworkSqlite();
-                    optionsBuilder = options => options.UseSqlite(config.GetConnectionString(ConstStrings.SQLiteConnection));
+                    optionsBuilder = options => options.UseSqlite(SQLiteConnection);
                     break;
 
                 case "postgresql":
                     services.AddEntityFrameworkNpgsql();
-                    optionsBuilder = options => options.UseNpgsql(config.GetConnectionString(ConstStrings.PostgreSQLConnection));
+                    optionsBuilder = options => options.UseNpgsql(PostgreSQLConnection);
                     break;
 
                 default:
                     services.AddEntityFrameworkInMemoryDatabase();
-                    optionsBuilder = options => options.UseInMemoryDatabase(config.GetConnectionString(ConstStrings.InMemoryConnection));
+                    optionsBuilder = options => options.UseInMemoryDatabase(InMemoryConnection);
                     break;
             }
 

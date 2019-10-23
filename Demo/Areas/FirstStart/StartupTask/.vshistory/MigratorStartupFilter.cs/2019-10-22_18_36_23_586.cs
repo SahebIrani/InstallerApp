@@ -100,7 +100,7 @@ namespace Demo.Areas.FirstStart.StartupTask
                 {
                     if (!await roleManager.RoleExistsAsync(Administrators))
                     {
-                        IdentityRole role = new IdentityRole(Administrators);
+                        var role = new IdentityRole(Administrators);
                         await roleManager.CreateAsync(role);
                     }
                     await userManager.AddToRoleAsync(AdminUser, Administrators);
